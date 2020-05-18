@@ -17,16 +17,18 @@ public class FieldDAO extends AbstractDAO<Field> {
     }
 
     public Field create(Field field) {
-        return null;
+        currentSession().save(field);
+        return field;
     }
 
     public Field update(Field field) {
-        return null;
+        return (Field) currentSession().merge(field);
     }
 
     public Field findById(String id) {
-        return null;
+        return get(id);
     }
+
 
     public Field delete(String id) {
         return null;
