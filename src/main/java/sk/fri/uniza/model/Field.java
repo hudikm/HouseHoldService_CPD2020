@@ -49,12 +49,17 @@ public class Field {
 
     @Override
     public boolean equals(Object o) {
-        return false;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Field field = (Field) o;
+
+        return name != null ? name.equals(field.name) : field.name == null;
     }
 
     @Override
     public int hashCode() {
-        return 0;
+        return name != null ? name.hashCode() : 0;
     }
 
     public String getDescripton() {

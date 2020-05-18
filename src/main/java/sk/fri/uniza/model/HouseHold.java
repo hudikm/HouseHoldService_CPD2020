@@ -115,7 +115,10 @@ public class HouseHold {
 
     @Override
     public boolean equals(Object o) {
-        return false;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        HouseHold houseHold = (HouseHold) o;
+        return id != null ? id.equals(houseHold.id) : houseHold.id == null;
     }
 
     @Override
