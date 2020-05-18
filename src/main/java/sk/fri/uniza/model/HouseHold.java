@@ -44,10 +44,14 @@ public class HouseHold {
     private String zip;
     @Valid
     private ContactPerson contactPerson;
-    @Transient
+
+    @OneToMany(fetch = FetchType.LAZY,
+            mappedBy = "houseHold")
     @JsonIgnore // Ignorovanie danej premenej s pohladu Serializacie do
-    // Objektu JSON.Gneroval by sa obrovský JSON a dochádzalo by aj k zacykleniu
+    // objektu JSON. Generoval by sa obrovský JSON a dochádzalo by aj k
+    // zacykleniu
     private Set<AbstractData> data;
+
     @Transient
     @JsonIgnore // Ignorovanie danej premenej s pohladu Serializacie do
     // Objektu JSON.Gneroval by sa obrovský JSON a dochádzalo by aj k zacykleniu

@@ -30,9 +30,13 @@ public abstract class AbstractData<T extends Object> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(accessMode = ApiModelProperty.AccessMode.READ_ONLY)
     private Long id;
-    @Transient
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "field_id", nullable = false)
     private Field field;
-    @Transient
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "household_id", nullable = false)
     private HouseHold houseHold;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm")

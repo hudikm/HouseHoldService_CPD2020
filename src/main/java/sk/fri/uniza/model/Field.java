@@ -8,15 +8,23 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Set;
 
+@Entity
 public class Field {
-
-
+    @Id
+    @NaturalId
+    @NotEmpty
     private String name;
 
     private String unit;
 
+    @NotEmpty
     private String descripton;
 
+    @OneToMany(fetch = FetchType.LAZY,
+            mappedBy = "field")
+    @JsonIgnore // Ignorovanie danej premenej s pohladu Serializacie do
+    // objektu JSON.Generoval by sa obrovský JSON a dochádzalo by aj k
+    // zacykleniu
     private Set<AbstractData> data;
 
     public String getName() {
