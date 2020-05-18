@@ -64,13 +64,13 @@ public class HouseHoldResource {
     @POST /*JAX-RS*/
     @UnitOfWork //Otvorí novú hibernate session // Dropwizard
     @ApiOperation(value = "Pridanie novej domácnosti")
-    public HouseHold createHouseHold(HouseHold houshold) {
+    public HouseHold createHouseHold(@Valid HouseHold houshold) {
         return houshold;
     }
 
     public HouseHold updateHouseHold(
             Long id,
-            HouseHold houshold) {
+           @Valid HouseHold houshold) {
         houshold.setId(id);
         return null;
     }

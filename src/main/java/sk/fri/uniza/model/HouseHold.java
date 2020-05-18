@@ -1,19 +1,32 @@
 package sk.fri.uniza.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModelProperty;
+import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.*;
 import javax.validation.Valid;
+import javax.validation.constraints.Pattern;
 import java.util.Collection;
 import java.util.Set;
 
 
 public class HouseHold {
+    @ApiModelProperty(hidden = true) // Swagger nebude zobrazovať atribút
     private Long id;
+    @NotEmpty
+    @ApiModelProperty(example = "Univerzitná") // Príklad pre swagger doku.
     private String street;
+    @NotEmpty
+    @ApiModelProperty(example = "Žilina") // Príklad pre swagger doku.
     private String city;
+    @NotEmpty
+    @ApiModelProperty(example = "Slovakia") // Príklad pre swagger doku.
     private String state;
+    @NotEmpty
+    @Pattern(regexp = "^\\d*$")
+    @ApiModelProperty(example = "01008") // Príklad pre swagger doku.
     private String zip;
+    @Valid
     private ContactPerson contactPerson;
     @JsonIgnore // Ignorovanie danej premenej s pohladu Serializacie do
     // Objektu JSON.Gneroval by sa obrovský JSON a dochádzalo by aj k zacykleniu
