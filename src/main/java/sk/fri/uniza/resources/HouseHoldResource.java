@@ -31,7 +31,7 @@ import java.util.List;
         schemes = {SwaggerDefinition.Scheme.HTTP}
 
 )
-
+@Api("/household") // Swagger
 @Path("/household") // JAX-RS
 @Produces(MediaType.APPLICATION_JSON)//Výstupné dáta sú vo forme JSON //JAX-RS
 @Consumes(MediaType.APPLICATION_JSON) //Vstupné dáta sú vo forme JSON //JAX-RS
@@ -81,8 +81,9 @@ public class HouseHoldResource {
     @GET
     @Path("{id}")
     @UnitOfWork //Otvorí novú hibernate session
-
+    @ApiOperation(value = "Údaje o konkrétnej domácnosť")
     public HouseHold getHouseHold(
+            @ApiParam(required = true)
             @PathParam("id") Long id) {
         return new HouseHold();
     }
