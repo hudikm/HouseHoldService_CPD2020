@@ -27,7 +27,8 @@ public class DataDAO extends AbstractDAO<AbstractData> {
     }
 
     public AbstractData create(AbstractData data) {
-        return null;
+        currentSession().save(data);
+        return data;
     }
 
     public List<AbstractData> findData(Long hhId, String fieldId,
