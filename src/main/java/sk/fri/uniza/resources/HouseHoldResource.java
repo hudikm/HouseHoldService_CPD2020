@@ -32,6 +32,9 @@ import java.util.List;
 
 )
 
+@Path("/household") // JAX-RS
+@Produces(MediaType.APPLICATION_JSON)//Výstupné dáta sú vo forme JSON //JAX-RS
+@Consumes(MediaType.APPLICATION_JSON) //Vstupné dáta sú vo forme JSON //JAX-RS
 public class HouseHoldResource {
 
     private HouseHoldDAO houseHoldDAO;
@@ -75,10 +78,13 @@ public class HouseHoldResource {
         return null;
     }
 
+    @GET
+    @Path("{id}")
+    @UnitOfWork //Otvorí novú hibernate session
 
     public HouseHold getHouseHold(
-            Long id) {
-        return null;
+            @PathParam("id") Long id) {
+        return new HouseHold();
     }
 
 
