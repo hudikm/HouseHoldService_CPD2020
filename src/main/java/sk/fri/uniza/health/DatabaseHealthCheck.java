@@ -42,6 +42,22 @@ public class DatabaseHealthCheck extends HealthCheck {
                         "0907888777", "f.mrkvicka@fri.uniza.sk"));
         houseHold = houseHoldDAO.create(houseHold);
 
+        DataDouble dataDouble = new DataDouble();
+        dataDouble.setValue(10.5);
+        dataDouble.setDateTime(LocalDateTime.now());
+
+        DataInteger dataInteger = new DataInteger();
+        dataInteger.setValue(5);
+        dataInteger.setDateTime(LocalDateTime.now());
+
+        DataString dataString = new DataString();
+        dataString.setValue("Slnecno");
+        dataString.setDateTime(LocalDateTime.now());
+
+        dataDAO.create(dataDouble);
+        dataDAO.create(dataInteger);
+        dataDAO.create(dataString);
+
         return Result.healthy();
     }
 }
