@@ -10,6 +10,18 @@ import javax.validation.constraints.Pattern;
 import java.util.Collection;
 import java.util.Set;
 
+@org.hibernate.annotations.NamedQueries({
+        @org.hibernate.annotations.NamedQuery(name = "HouseHold_findByZip",
+                query = "from HouseHold where zip = :zipNo"),
+        @org.hibernate.annotations.NamedQuery(
+                name = "HouseHold_findByFirstName",
+                query = "from HouseHold where firstname = :name"),
+        @org.hibernate.annotations.NamedQuery(name = "HouseHold_findLastName",
+                query = "from HouseHold where lastname = :name"),
+        @org.hibernate.annotations.NamedQuery(name = "HouseHold_findAll",
+                query = "from HouseHold"),
+
+})
 @Entity
 public class HouseHold {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
