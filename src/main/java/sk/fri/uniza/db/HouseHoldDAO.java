@@ -18,11 +18,12 @@ public class HouseHoldDAO extends AbstractDAO<HouseHold> {
     }
 
     public HouseHold create(HouseHold houseHold) {
-        return null;
+        currentSession().save(houseHold);
+        return houseHold;
     }
 
     public HouseHold update(HouseHold houseHold) {
-        return null;
+        return (HouseHold) currentSession().merge(houseHold);
     }
 
     public List<HouseHold> findByZip(String zip) {
@@ -38,7 +39,7 @@ public class HouseHoldDAO extends AbstractDAO<HouseHold> {
     }
 
     public HouseHold findById(Long ID) {
-        return null;
+        return get(ID);
     }
 
     public List<HouseHold> findAll() {
