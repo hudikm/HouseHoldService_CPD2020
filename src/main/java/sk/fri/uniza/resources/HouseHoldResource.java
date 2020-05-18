@@ -80,8 +80,11 @@ public class HouseHoldResource {
     }
 
 
+    @GET
+    @UnitOfWork //Otvorí novú hibernate session
+    @ApiOperation(value = "Zoznam všetkých domácnosti")
     public List<HouseHold> listHouseHold() {
-        return null;
+        return houseHoldDAO.findAll();
     }
 
     @GET
@@ -94,9 +97,22 @@ public class HouseHoldResource {
     }
 
 
+    @GET
+    @Path("filter")
+    @UnitOfWork //Otvorí novú hibernate session
+    @ApiOperation(value = "Vyfiltrovaný zoznam domácnosti")
     public List<HouseHold> filterHouseHold(
-            FilterEnum filter,
-            String value) {
+            @QueryParam("filter") FilterEnum filter,
+            @QueryParam("value") String value) {
+
+        switch (filter) {
+            case zip:
+                return houseHoldDAO.findByZip(value);
+            case firstName:
+                return houseHoldDAO.findByFirstName(value);
+            case lastName:
+                return houseHoldDAO.findByLastName(value);
+        }
 
         return null;
     }
