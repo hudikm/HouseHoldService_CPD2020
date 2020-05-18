@@ -81,6 +81,8 @@ public class HouseHoldServiceApplication
                 new HouseHoldDAO(hibernate.getSessionFactory());
         final DataDAO dataDAO =
                 new DataDAO(hibernate.getSessionFactory());
+        final FieldDAO fieldDAO =
+                new FieldDAO(hibernate.getSessionFactory());
 
         // Vytvorené objekty reprezentujúce REST rozhranie
         environment.jersey()
@@ -95,7 +97,7 @@ public class HouseHoldServiceApplication
                                         IotNodeDAO.class, FieldDAO.class,
                                         DataDAO.class},
                                 new Object[]{houseHoldDAO, null,
-                                        null, dataDAO
+                                        fieldDAO, dataDAO
                                 });
         // Zaregistrovanie Healthcheck
         environment.healthChecks()
