@@ -35,6 +35,8 @@ public abstract class AbstractData<T extends Object> {
     @Transient
     private HouseHold houseHold;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm")
+    @ApiModelProperty(example = "31/01/2020 14:00")
     private LocalDateTime dateTime;
 
     public Long getId() {
