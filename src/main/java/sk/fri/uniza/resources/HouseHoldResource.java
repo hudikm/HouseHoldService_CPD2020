@@ -61,9 +61,11 @@ public class HouseHoldResource {
         return null;
     }
 
-
+    @POST /*JAX-RS*/
+    @UnitOfWork //Otvorí novú hibernate session // Dropwizard
+    @ApiOperation(value = "Pridanie novej domácnosti")
     public HouseHold createHouseHold(HouseHold houshold) {
-        return null;
+        return houshold;
     }
 
     public HouseHold updateHouseHold(
