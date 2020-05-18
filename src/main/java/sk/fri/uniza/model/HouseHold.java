@@ -15,7 +15,11 @@ public class HouseHold {
     private String state;
     private String zip;
     private ContactPerson contactPerson;
+    @JsonIgnore // Ignorovanie danej premenej s pohladu Serializacie do
+    // Objektu JSON.Gneroval by sa obrovský JSON a dochádzalo by aj k zacykleniu
     private Set<AbstractData> data;
+    @JsonIgnore // Ignorovanie danej premenej s pohladu Serializacie do
+    // Objektu JSON.Gneroval by sa obrovský JSON a dochádzalo by aj k zacykleniu
     private Collection<IotNode> iotNode;
 
     public Long getId() {
