@@ -82,7 +82,7 @@ public class HouseHoldServiceApplication
 
         // Vytvorené objekty reprezentujúce REST rozhranie
         environment.jersey()
-                .register(new HouseHoldResource(null, null));
+                .register(new HouseHoldResource(houseHoldDAO, null));
 
         // Vytvorenie Healthcheck (overenie zdravia aplikácie), ktorý
         // využijeme na otestovanie databázy
