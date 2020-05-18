@@ -9,13 +9,16 @@ import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class AbstractData<T extends Object> {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(accessMode = ApiModelProperty.AccessMode.READ_ONLY)
     private Long id;
-
+    @Transient
     private Field field;
-
+    @Transient
     private HouseHold houseHold;
 
     private LocalDateTime dateTime;
