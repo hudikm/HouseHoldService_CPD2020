@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
+@JsonTypeName("string")
 public class DataString extends AbstractData<String> {
 
     @Column(name = "string_value")

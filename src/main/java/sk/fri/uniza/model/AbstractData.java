@@ -11,6 +11,20 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = DataDouble.class, name = "double"),
+        @JsonSubTypes.Type(value = DataInteger.class, name = "integer"),
+        @JsonSubTypes.Type(value = DataString.class, name = "string")
+})
+// Slúži iba na tvorbu swagger dokumentácie
+@ApiModel(value = "Data", discriminator = "type", subTypes = {DataDouble.class
+        , DataInteger.class,
+        DataString.class})
 public abstract class AbstractData<T extends Object> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

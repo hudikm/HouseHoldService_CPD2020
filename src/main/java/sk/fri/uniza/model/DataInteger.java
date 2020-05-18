@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
+@JsonTypeName("integer")
 public class DataInteger extends AbstractData<Integer> {
 
     @Column(name = "integer_value")
