@@ -21,7 +21,7 @@ public class Field {
     private String descripton;
 
     @OneToMany(fetch = FetchType.LAZY,
-            mappedBy = "field")
+            mappedBy = "field", cascade = CascadeType.REMOVE)
     @JsonIgnore // Ignorovanie danej premenej s pohladu Serializacie do
     // objektu JSON.Generoval by sa obrovský JSON a dochádzalo by aj k
     // zacykleniu
