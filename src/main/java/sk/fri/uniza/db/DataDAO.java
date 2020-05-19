@@ -23,7 +23,17 @@ public class DataDAO extends AbstractDAO<AbstractData> {
     public AbstractData create(Long houseHoldId, String fieldId,
                                AbstractData data) throws
             WebApplicationException {
-        return null;
+        HouseHold houseHold =
+                currentSession().get(HouseHold.class, houseHoldId);
+
+        Field field = currentSession().get(Field.class, fieldId);
+        if (houseHold == null || field == null)
+            throw new WebApplicationException("Column 'fieldId' or " +
+                    "'houseHoldId' don't exists  ", 400);
+        data.setHouseHold(houseHold);
+        data.setField(field);
+        currentSession().save(data);
+        return data;
     }
 
     public AbstractData create(AbstractData data) {
@@ -34,6 +44,11 @@ public class DataDAO extends AbstractDAO<AbstractData> {
     public List<AbstractData> findData(Long hhId, String fieldId,
                                        LocalDateTime from,
                                        LocalDateTime to) {
-        return null;
+        return list(namedQuery("AbstractData_findDataFromTo")
+                .setParameter("hhId", hhId)
+                .setParameter("fieldId", fieldId)
+                .setParameter("from", from)
+                .setParameter("to", to)
+        );
     }
 }

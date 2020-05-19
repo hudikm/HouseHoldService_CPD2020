@@ -37,6 +37,6 @@ public class FieldDAO extends AbstractDAO<Field> {
     }
 
     public List<Field> allFields() {
-        return null;
+        return list(namedQuery("Field_All"));
     }
 }
