@@ -14,6 +14,7 @@ import sk.fri.uniza.db.FieldDAO;
 import sk.fri.uniza.db.HouseHoldDAO;
 import sk.fri.uniza.db.IotNodeDAO;
 import sk.fri.uniza.health.DatabaseHealthCheck;
+import sk.fri.uniza.health.DeleteHealthCheck;
 import sk.fri.uniza.model.*;
 import sk.fri.uniza.resources.FieldResource;
 import sk.fri.uniza.resources.HouseHoldResource;
@@ -90,8 +91,10 @@ public class HouseHoldServiceApplication
 
         // Vytvorenie Healthcheck (overenie zdravia aplikácie), ktorý
         // využijeme na otestovanie databázy
+        UnitOfWorkAwareProxyFactory unitOfWorkAwareProxyFactory =
+                new UnitOfWorkAwareProxyFactory(hibernate);
         final DatabaseHealthCheck databaseHealthCheck =
-                new UnitOfWorkAwareProxyFactory(hibernate)
+                unitOfWorkAwareProxyFactory
                         .create(DatabaseHealthCheck.class,
                                 new Class[]{HouseHoldDAO.class,
                                         IotNodeDAO.class, FieldDAO.class,
@@ -99,11 +102,19 @@ public class HouseHoldServiceApplication
                                 new Object[]{houseHoldDAO, null,
                                         fieldDAO, dataDAO
                                 });
+        final DeleteHealthCheck deleteHealthCheck =
+                unitOfWorkAwareProxyFactory
+                        .create(DeleteHealthCheck.class,
+                                FieldDAO.class,
+                                fieldDAO);
         // Zaregistrovanie Healthcheck
         environment.healthChecks()
                 .register("databaseHealthcheck", databaseHealthCheck);
+        environment.healthChecks()
+                .register("deleteHealthcheck", deleteHealthCheck);
         // Spustenie všetkých health kontrol
-        environment.healthChecks().runHealthChecks();
+        environment.healthChecks().runHealthCheck("databaseHealthcheck");
+        environment.healthChecks().runHealthCheck("deleteHealthcheck");
 
     }
 
